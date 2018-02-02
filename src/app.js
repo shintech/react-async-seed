@@ -15,10 +15,9 @@ export default function (options) {
 
   app.use('/vendor', express.static(path.join(basedir, 'node_modules')))
   app.use('/public', express.static(path.join(basedir, 'public')))
-  app.use('/fonts', express.static(path.join(basedir, 'node_modules', 'bootstrap', 'fonts')))
+  app.use('/frontend', express.static(path.join(__dirname, 'static')))
 
-  // app.set('view engine', 'pug')
-  app.use(express.static(path.join(__dirname, 'static')))
+  app.set('view engine', 'pug')
 
   app.on('error', err => {
     logger.error(err)

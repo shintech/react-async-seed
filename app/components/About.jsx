@@ -4,7 +4,7 @@ export default class Home extends React.Component {
   render () {
     return pug`
       div
-        h1 Home
+        h1 About
     `
   }
 }

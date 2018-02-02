@@ -1,30 +1,36 @@
 import React from 'react'
 
 export default class Navigation extends React.Component {
+  constructor (props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+
+    this.state = {
+      activeClassName: `#${props.location.pathname}`
+    }
+
+    window.onhashchange = (e) => {
+      this.setState({
+        activeClassName: window.location.hash
+      })
+    }
+  }
+
+  handleClick (e) {
+    this.setState({
+      activeClassName: e.target.dataset.path
+    })
+  }
+
   render () {
-    return (
-      <nav className='navbar navbar-custom'>
-        <div className='navbar-header'>
-          <a className='navbar-brand' href='#/home'><svg className='logo' /></a>
-
-          <button type='button' className='navbar-toggle' data-toggle='collapse' data-target='#myNavbar'>
-            <span className='icon-bar' />
-            <span className='icon-bar' />
-            <span className='icon-bar' />
-          </button>
-        </div>
-
-        <div className='collapse navbar-collapse' id='myNavbar'>
-          <ul className='nav navbar-nav'>
-            <li className='nav-item'><a className='nav-link' href='#/home'>Home</a></li>
-            <li className='nav-item'><a className='nav-link' href='#/table'>Table</a></li>
-          </ul>
-          <ul className='nav navbar-nav navbar-right'>
-            <li><a href='#'><span className='glyphicon glyphicon-user' /> Sign Up</a></li>
-            <li><a href='#'><span className='glyphicon glyphicon-log-in' /> Login</a></li>
-          </ul>
-        </div>
-      </nav>
-    )
+    return pug`
+      nav
+        li
+          a(onClick=${this.handleClick} data-path='/' className=${this.state.activeClassName === '#/' ? 'active' : null} href='#/') home
+        li
+          a(onClick=${this.handleClick} data-path='/page' className=${this.state.activeClassName === '#/page' ? 'active' : null} href='#/page') page 
+        li
+          a(onClick=${this.handleClick} data-path='/about' className=${this.state.activeClassName === '#/about' ? 'active' : null} href='#/about') about               
+    `
   }
 }

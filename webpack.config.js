@@ -4,7 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: path.join(__dirname, 'app', 'index.html'),
+  template: path.join(__dirname, 'app', 'index.pug'),
   filename: 'index.html',
   inject: 'body'
 })
@@ -37,6 +37,16 @@ const config = {
           use: ['css-loader', 'sass-loader'],
           publicPath: path.join(__dirname, 'public', 'css')
         })
+      },
+      { test: /\.pug$/,
+        include: paths.APP,
+        use: [
+          { loader: 'pug-loader',
+            options: {
+              pretty: true
+            }
+          }
+        ]
       }
     ]
   },

@@ -1,21 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter as Router, Route } from 'react-router-dom'
+
 import Navigation from './components/Navigation.jsx'
 import Home from './components/Home.jsx'
-import Table from './components/Table.jsx'
+import Page from './components/Page.jsx'
+import About from './components/About.jsx'
 
-global.jQuery = require('jquery')
-require('bootstrap')
 require('../public/css/style.scss')
 
 ReactDOM.render((
   <Router>
     <div>
-      <Navigation />
+      <Route component={Navigation} />
       <div className='container-fluid'>
-        <Route exact path='/home' component={Home} />
-        <Route exact path='/table' component={Table} />
+        <Route exact path='/' component={Home} />
+        <Route exact path='/page' component={Page} />
+        <Route exact path='/about' component={About} />
       </div>
     </div>
   </Router>
